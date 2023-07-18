@@ -1,0 +1,41 @@
+<div class="container my-4">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Fecha solicitud</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor="let item of ArrayPedidos">
+                <td>
+                   {{item.nombre}}
+                </td>
+                <td>
+                    <span *ngIf="item.estado != 0">{{item.cantidad}}</span>
+                    <input *ngIf="item.estado == 0" type="number" class="form-control" value="{{item.cantidad}}" min="1" max="100" id="cantidad{{item.idPedido}}/{{item.idProducto}}">
+                </td>
+                
+                <td>{{item.precio}}$</td>
+                <td>{{item.fecha}}</td>
+                <td *ngIf="item.estado == 0">Pendiente</td>
+                <td *ngIf="item.estado == 1">Aceptado</td>
+                <td *ngIf="item.estado == 2">Rechazado</td>
+                <td>{{item.precio * item.cantidad}}$</td>
+                <td>
+                    <button class="btn btn-success m-2" (click)="actualizarPedido(item.idPedido, item.idProducto)"
+                    [class.disabled]="item.estado != 0">Actualizar</button>
+                    <button class="btn btn-danger m-2" (click)="borrarPedido(item.idPedido, item.idProducto)"
+                    [class.disabled]="item.estado != 0">Borrar</button>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>

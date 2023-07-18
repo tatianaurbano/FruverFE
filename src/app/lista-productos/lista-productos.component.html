@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
+        <div class="col-3" *ngFor="let producto of productos | async let i = index">
+            <div class="card h-100">
+                <img alt="Imagen del producto" src="assets/imagenes/{{producto.nombre}}.jpg"
+                    class="card-img-top producto">
+
+                <div class="card-body d-flex flex-column text-center">
+                    <h5 class="card-title txtFruta">{{producto.nombre}}</h5>
+                    <p class="card-text preciotxt">Desde: ${{producto.precio}}</p>
+                </div>
+
+                <div class="card-footer">
+                    <div>
+                        <form class="row g-3" (ngSubmit)="onSubmit(i)" #PedidoForm{{i}}="ngForm" name="PedidoForm{{i}}"
+                            id="PedidoForm{{i}}">
+                            <input type="hidden" name="idProducto" id="idProducto" value="{{producto.idProducto}}">
+                            <div class="col-4" *ngIf="loginService.isLogged()">
+                                <input type="number" class="form-control col-4" aria-label="Cantidad"
+                                    aria-describedby="basic-addon1" min="1" value="1" required name="cantidad"
+                                    id="cantidad">
+                            </div>
+                            <div *ngIf="loginService.isLogged()" class="col-8">
+                                <button type="submit" class="btn btn-outline-primary">Añadir al carrito</button>
+                            </div>
+                            <div class="row my-4">
+                                <div class="col-6" *ngIf="loginService.isLogged() && loginService.isAdmin()">
+                                    <a class="btn btn-outline-success"
+                                        [routerLink]="['/productos/editar', producto.idProducto]">Editar</a>
+                                </div>
+                                <div class="col-6" *ngIf="loginService.isLogged() && loginService.isAdmin()">
+                                    <button type="button" class="btn btn-outline-danger"
+                                        (click)="borrarProducto(producto.idProducto)">Eliminar</button>
+                                </div>
+                            </div>
+                           
+
+                        </form>
+
+                    </div>
+                    <div class="row my-3 text-center">
+                        <a class="btn btn-outline-primary"
+                            [routerLink]="['/productos/detalle', producto.idProducto]">Ver más</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

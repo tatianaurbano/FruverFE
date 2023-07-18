@@ -1,0 +1,34 @@
+
+<div class="container">
+    <h3 class="my-4">{{titulo}}</h3>
+    <div class="row">
+        <div class="col-sm-12">
+            <form (ngSubmit)="onSubmit()" #productoForm="ngForm">
+                <fieldset class="form-group">
+                    <div class="col-sm-12">
+                        <label class="control-label" for="nombre">Nombre</label>
+                        <input type="text" class="form-control" required [(ngModel)]="producto.nombre" name="nombre">
+                    </div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <div class="col-sm-12">
+                        <label class="control-label" for="email">Detalle</label>
+                        <textarea class="form-control" required [(ngModel)]="producto.detalle" name="detalle" rows="3"></textarea>
+                    </div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <div class="col-sm-12">
+                        <label class="control-label" for="telefono">Precio</label>
+                        <input type="text" class="form-control" required [(ngModel)]="producto.precio" name="precio">
+                    </div>
+                </fieldset>
+                <fieldset class="form-group my-3">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary" [disabled]="!productoForm.form.valid">Enviar</button>
+                    </div>
+                </fieldset>
+    
+            </form>
+        </div>
+    </div>
+</div>

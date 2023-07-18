@@ -1,0 +1,14 @@
+<div class="container my-3">
+    <h3>Inicio de sesion</h3>
+    <form (ngSubmit)="onSubmit()" #productoForm="ngForm">
+        <div class="mb-3">
+          <label for="cedula" class="form-label">Cedula</label>
+          <input type="text" class="form-control" id="cedula" aria-describedby="emailHelp" [(ngModel)]="cliente.cedula" name="cedula" required>
+        </div>
+        <div class="mb-3">
+          <label for="contrasena" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="contrasena" [(ngModel)]="cliente.contrasena" name="contrasena" required>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!productoForm.form.valid">Enviar</button>
+      </form>
+</div>
